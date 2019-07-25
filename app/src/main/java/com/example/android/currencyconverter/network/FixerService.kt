@@ -1,7 +1,5 @@
 package com.example.android.currencyconverter.network
 
-import android.provider.ContactsContract
-import com.example.android.currencyconverter.home.DatabaseRates
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

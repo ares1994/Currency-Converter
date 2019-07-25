@@ -1,13 +1,14 @@
 package com.example.android.currencyconverter.home
 
 
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android.currencyconverter.ConverterRepo
-import com.example.android.currencyconverter.Util
+import com.example.android.currencyconverter.*
+import org.jetbrains.anko.doAsync
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(application: ConverterApplication) : AndroidViewModel(application) {
     private val _currentRates = MutableLiveData<DatabaseRates>()
     val currentRates: LiveData<DatabaseRates> get() = _currentRates
     private var position: Int = 0
@@ -18,9 +19,10 @@ class HomeViewModel : ViewModel() {
     init {
         ConverterRepo().refreshCurrencyRates()
 
+        _currentRates.value = ConverterRepo().realm.find()
+
         ConverterRepo().realm.addChangeListener {
-            val id = 1
-            _currentRates.value = it.where(DatabaseRates::class.java).equalTo("id", id).findFirst()
+            _currentRates.value = it.find()
         }
         _currentSpinnerSelected.value = "USD"
     }
@@ -32,10 +34,26 @@ class HomeViewModel : ViewModel() {
     }
 
 
-    fun calculateValue(value: String): Double {
+    fun calculateFirstEditValue(value: String): Double {
+        if (currentRates.value == null) {
+            return -1.00
+        }
         return value.toDouble() * Util.appropriateRate(currentRates.value!!, position)
+    }
+
+    fun calculateSecondEditValue(value: String): Double {
+        if (currentRates.value == null) {
+            return -1.00
+        }
+        return value.toDouble() / Util.appropriateRate(currentRates.value!!, position)
+    }
 
 
+    fun setTimeStamp(): String {
+        return getApplication<ConverterApplication>().getString(
+            R.string.timeStamp,
+            Util.getStringTimeStampWithDate(_currentRates.value?.timeEntered!!)
+        )
     }
 
 

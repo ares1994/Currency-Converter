@@ -1,6 +1,7 @@
 package com.example.android.currencyconverter
 
-import com.example.android.currencyconverter.home.DatabaseRates
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Util {
 
@@ -27,9 +28,15 @@ class Util {
                 4-> rate = databaseRates.jPY!!
                 5-> rate = databaseRates.cNY!!
             }
-
             return rate
+        }
 
+
+        fun getStringTimeStampWithDate(date: Long): String {
+            val dateFormat = SimpleDateFormat("HH:mm z",
+                Locale.getDefault())
+            dateFormat.timeZone = TimeZone.getDefault()
+            return dateFormat.format(date).toString()
         }
 
 

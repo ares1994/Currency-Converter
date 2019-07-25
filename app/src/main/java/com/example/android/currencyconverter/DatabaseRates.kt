@@ -1,4 +1,4 @@
-package com.example.android.currencyconverter.home
+package com.example.android.currencyconverter
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject

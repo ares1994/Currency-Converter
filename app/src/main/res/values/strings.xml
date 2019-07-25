@@ -9,4 +9,7 @@
     <string name="convert">Convert</string>
     <string name="eu">EU</string>
     <string name="dot">.</string>
+
+
+    <string name="timeStamp"><u>Mid market exchange rate at %1$s</u></string>
 </resources>

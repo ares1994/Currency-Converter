@@ -1,16 +1,14 @@
 package com.example.android.currencyconverter
 
 import android.util.Log
-import com.example.android.currencyconverter.home.DatabaseRates
 import com.example.android.currencyconverter.network.Network
 import com.example.android.currencyconverter.network.Rates
 import com.example.android.currencyconverter.network.Response
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import io.realm.kotlin.createObject
-import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Callback
+import java.nio.file.Files.find
 
 class ConverterRepo {
     val realm: Realm by lazy {
@@ -37,7 +35,7 @@ class ConverterRepo {
             databaseRates.timeEntered = System.currentTimeMillis()
             realm.commitTransaction()
         } else {
-            val databaseRates = find()
+            val databaseRates = realm.find()
             databaseRates!!.uSD = rates.uSD
             databaseRates.nGN = rates.nGN
             databaseRates.jPY = rates.jPY
@@ -45,19 +43,12 @@ class ConverterRepo {
             databaseRates.cNY = rates.cNY
             databaseRates.aED = rates.aED
             databaseRates.timeEntered = System.currentTimeMillis()
-
             realm.commitTransaction()
         }
-
-
         Log.w("Ares", "Insert successfully called")
-
     }
 
-    private fun find(): DatabaseRates? {
-        val id = 1
-        return realm.where(DatabaseRates::class.java).equalTo("id", id).findFirst()
-    }
+
 
 
     fun refreshCurrencyRates() {
@@ -77,4 +68,9 @@ class ConverterRepo {
     }
 
 
+}
+
+fun Realm.find(): DatabaseRates? {
+    val id = 1
+    return this.where(DatabaseRates::class.java).equalTo("id", id).findFirst()
 }

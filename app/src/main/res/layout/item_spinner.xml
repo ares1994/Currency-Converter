@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="country" type="com.example.android.currencyconverter.CountryItem"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="120dp"
+            android:padding="8dp"
+            android:layout_height="wrap_content">
+        <com.mikhaellopez.circularimageview.CircularImageView android:layout_width="32dp"
+                                                              android:layout_height="32dp"
+                                                              android:id="@+id/circleImageView"
+                                                              app:layout_constraintStart_toStartOf="parent"
+                                                              android:scaleType="centerCrop"
+                                                              app:layout_constraintTop_toTopOf="parent"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:textAppearance="?android:textAppearanceMedium"
+                  app:layout_constraintStart_toEndOf="@id/circleImageView"
+                  app:layout_constraintTop_toTopOf="@id/circleImageView"
+                  app:layout_constraintBottom_toBottomOf="@id/circleImageView"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  tools:text="NGR"
+                  android:id="@+id/countryLabelTextView"
+                  android:gravity="center"
+
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

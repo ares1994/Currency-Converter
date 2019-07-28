@@ -50,6 +50,9 @@ class HomeViewModel(application: ConverterApplication) : AndroidViewModel(applic
 
 
     fun setTimeStamp(): String {
+        if (currentRates.value==null){
+            return ""
+        }
         return getApplication<ConverterApplication>().getString(
             R.string.timeStamp,
             Util.getStringTimeStampWithDate(_currentRates.value?.timeEntered!!)
@@ -57,4 +60,8 @@ class HomeViewModel(application: ConverterApplication) : AndroidViewModel(applic
     }
 
 
+    override fun onCleared() {
+        super.onCleared()
+        ConverterRepo().realm.removeAllChangeListeners()
+    }
 }

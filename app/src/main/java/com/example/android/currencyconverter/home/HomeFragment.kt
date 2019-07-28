@@ -16,9 +16,11 @@ import com.example.android.currencyconverter.databinding.FragmentConverterBindin
 
 import com.example.android.currencyconverter.R
 import com.google.android.material.snackbar.Snackbar
-
+const val NO_RATES = -1.00
 
 class HomeFragment : Fragment() {
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,7 +96,7 @@ class HomeFragment : Fragment() {
             if (input.isBlank()) {
                 return
             }
-            if (viewModel!!.calculateFirstEditValue(input) == -1.00) {
+            if (viewModel!!.calculateFirstEditValue(input) == NO_RATES) {
                 Snackbar.make(binding.root, "Rates have not been retrieved yet", Snackbar.LENGTH_LONG).show()
                 return
             }
@@ -108,14 +110,13 @@ class HomeFragment : Fragment() {
             if (input.isBlank()) {
                 return
             }
-            if (viewModel!!.calculateFirstEditValue(input) == -1.00) {
+            if (viewModel!!.calculateFirstEditValue(input) == NO_RATES) {
                 Snackbar.make(binding.root, "Rates have not been retrieved yet", Snackbar.LENGTH_LONG).show()
                 return
             }
             firstCurrencyEditText.setText("${viewModel!!.calculateSecondEditValue(input)}")
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

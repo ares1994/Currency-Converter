@@ -6,7 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-
+/**
+ * A retrofit service to fetch a current rates.
+ */
 interface FixerService {
     @GET("api/latest")
     fun getCurrentExchangeRates(
@@ -14,23 +16,19 @@ interface FixerService {
         @Query("symbols") symbols: String = "USD,NGN,AED,GBP,JPY,CNY",
         @Query("format") format: Int = 1
     ): Call<Response>
+
+
 }
 
-/**
- * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
- * full Kotlin compatibility.
- */
-
 
 /**
- * Main entry point for network access. Call like `Network.devbytes.getPlaylist()`
+ * Main entry point for network access. Call like `Network.fixerIO.getCurrentExchangeRates()`
  */
 object Network {
-    // Configure retrofit to parse JSON and use coroutines
+    // Configure retrofit to parse JSON
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://data.fixer.io/")
         .addConverterFactory(GsonConverterFactory.create())
-//        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
     val fixerIO: FixerService = retrofit.create(FixerService::class.java)

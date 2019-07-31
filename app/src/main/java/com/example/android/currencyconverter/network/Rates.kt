@@ -3,7 +3,7 @@ package com.example.android.currencyconverter.network
 
 import com.google.gson.annotations.SerializedName
 
-
+//Kotlin object representation of the inner rate object retrieved from Fixer.io
 data class Rates(
 
     @field:SerializedName("AED")

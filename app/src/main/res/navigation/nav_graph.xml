@@ -5,7 +5,7 @@
             app:startDestination="@id/converterFragment">
 
     <fragment android:id="@+id/converterFragment" android:name="com.example.android.currencyconverter.home.HomeFragment"
-              android:label="fragment_converter" tools:layout="@layout/fragment_converter"/>
+              tools:layout="@layout/fragment_converter"/>
 
 
 </navigation>

@@ -3,7 +3,7 @@ package com.example.android.currencyconverter.network
 
 import com.google.gson.annotations.SerializedName
 
-
+//Kotlin object representation of JSON retrieved from Fixer.io
 data class Response(
 
 	@field:SerializedName("date")

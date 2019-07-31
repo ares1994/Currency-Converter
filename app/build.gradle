@@ -31,6 +31,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -50,8 +53,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+    implementation "androidx.navigation:navigation-fragment:2.1.0-beta02"
+    implementation "androidx.navigation:navigation-ui-ktx:2.1.0-beta02"
 
     implementation 'com.mikhaellopez:circularimageview:4.0.1'
 
@@ -59,6 +62,14 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    implementation "androidx.work:work-runtime-ktx:2.1.0"
+
+
+
 
 
     // Coroutines for getting off the UI thread
